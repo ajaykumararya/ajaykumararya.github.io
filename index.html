@@ -2,17 +2,1006 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pure CSS Drawing</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap">
+
+    <title>Ajay Kumar Arya | Senior Software Engineer</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "DM Sans", sans-serif;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(212,175,55,.10), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(120,80,20,.12), transparent 30%),
+                #050505;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================
+           BACKGROUND
+        ========================================== */
+
+        .luxury-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: .45;
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 320px;
+            height: 320px;
+            top: -120px;
+            left: -100px;
+            background: radial-gradient(circle at 35% 35%,
+                rgba(255,215,120,.28),
+                transparent 65%);
+        }
+
+        .orb-2 {
+            width: 420px;
+            height: 420px;
+            right: -160px;
+            bottom: -160px;
+            background: radial-gradient(circle at 40% 40%,
+                rgba(170,110,30,.20),
+                transparent 65%);
+            animation-delay: -3s;
+        }
+
+        @keyframes floatOrb {
+            0%,100% {
+                transform: translate3d(0,0,0);
+            }
+
+            50% {
+                transform: translate3d(25px,-20px,0);
+            }
+        }
+
+
+        /* ==========================================
+           GOLD TEXT
+        ========================================== */
+
+        .gold-text {
+            background: linear-gradient(
+                120deg,
+                #fff5c7,
+                #d4af37,
+                #fff1a8,
+                #b8860b
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+
+        /* ==========================================
+           MAIN 3D STAGE
+        ========================================== */
+
+        .scene {
+            perspective: 1800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-wrapper {
+            transform-style: preserve-3d;
+            transition:
+                transform .18s cubic-bezier(.2,.8,.2,1);
+        }
+
+
+        /* ==========================================
+           PROFILE CARD
+        ========================================== */
+
+        .profile-card {
+            position: relative;
+            transform-style: preserve-3d;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.075),
+                    rgba(255,255,255,.018)
+                );
+
+            border: 1px solid rgba(212,175,55,.35);
+
+            box-shadow:
+                0 50px 120px rgba(0,0,0,.65),
+                inset 0 1px 0 rgba(255,255,255,.10),
+                inset 0 0 50px rgba(212,175,55,.025);
+
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+
+        /* Gold border glow */
+
+        .profile-card::before {
+            content: "";
+            position: absolute;
+            inset: 1px;
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    transparent 15%,
+                    rgba(255,215,100,.12),
+                    transparent 40%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* ==========================================
+           PHOTO 3D
+        ========================================== */
+
+        .photo-container {
+            transform-style: preserve-3d;
+        }
+
+        .photo-frame {
+            position: relative;
+            transform-style: preserve-3d;
+
+            padding: 9px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fff2ad,
+                    #b8860b 30%,
+                    #f4d675 55%,
+                    #8a6508
+                );
+
+            box-shadow:
+                0 35px 70px rgba(0,0,0,.65),
+                0 0 0 1px rgba(255,255,255,.15);
+
+            transform: translateZ(55px);
+        }
+
+        .photo-frame::after {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(255,240,170,.55);
+            pointer-events: none;
+        }
+
+        .photo {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            filter:
+                contrast(1.04)
+                saturate(1.03);
+
+            transform: translateZ(10px);
+        }
+
+
+        /* ==========================================
+           FLOATING BADGE
+        ========================================== */
+
+        .floating-badge {
+            transform:
+                translateZ(90px)
+                rotate(-3deg);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,.55);
+
+            animation: badgeFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+            0%,100% {
+                transform:
+                    translateZ(90px)
+                    translateY(0)
+                    rotate(-3deg);
+            }
+
+            50% {
+                transform:
+                    translateZ(90px)
+                    translateY(-8px)
+                    rotate(-1deg);
+            }
+        }
+
+
+        /* ==========================================
+           DETAIL CARDS
+        ========================================== */
+
+        .detail {
+            position: relative;
+            overflow: hidden;
+
+            background: rgba(255,255,255,.035);
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            transition:
+                transform .3s ease,
+                border-color .3s ease,
+                background .3s ease;
+        }
+
+        .detail:hover {
+            transform: translateY(-4px) translateZ(20px);
+
+            background: rgba(212,175,55,.055);
+
+            border-color:
+                rgba(212,175,55,.30);
+        }
+
+        .detail::before {
+            content: "";
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            right: -50px;
+            top: -50px;
+
+            background: rgba(212,175,55,.08);
+
+            border-radius: 50%;
+            filter: blur(15px);
+        }
+
+
+        /* ==========================================
+           SKILLS
+        ========================================== */
+
+        .skill {
+            border: 1px solid rgba(212,175,55,.17);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(212,175,55,.08),
+                    rgba(255,255,255,.025)
+                );
+
+            transition: .3s ease;
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212,175,55,.45);
+            box-shadow: 0 15px 35px rgba(0,0,0,.25);
+        }
+
+
+        /* ==========================================
+           GOLD LINE
+        ========================================== */
+
+        .gold-line {
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #d4af37,
+                    transparent
+                );
+
+            opacity: .45;
+        }
+
+
+        /* ==========================================
+           SHINE
+        ========================================== */
+
+        .shine {
+            position: absolute;
+            inset: -100%;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 35%,
+                    rgba(255,255,255,.08),
+                    transparent 45%
+                );
+
+            transform: translateX(-100%);
+            animation: shine 8s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            25%,100% {
+                transform: translateX(100%);
+            }
+        }
+
+
+        /* ==========================================
+           ANIMATION
+        ========================================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            animation: reveal .9s ease forwards;
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: .15s; }
+        .delay-2 { animation-delay: .3s; }
+        .delay-3 { animation-delay: .45s; }
+        .delay-4 { animation-delay: .6s; }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media(max-width: 767px) {
+
+            .scene {
+                perspective: none;
+            }
+
+            .profile-wrapper {
+                transform: none !important;
+            }
+
+            .profile-card {
+                border-radius: 24px;
+            }
+
+            .photo-frame {
+                transform: none;
+            }
+
+            .floating-badge {
+                transform: translateZ(20px);
+            }
+
+        }
+
+
+        /* ==========================================
+           PRINT
+        ========================================== */
+
+        @media print {
+
+            body {
+                background: white;
+                color: #111;
+            }
+
+            .luxury-bg {
+                display: none;
+            }
+
+            .profile-card {
+                box-shadow: none;
+                background: white;
+                border: 1px solid #ddd;
+            }
+
+        }
+
+    </style>
 </head>
+
+
 <body>
-    <div class="card">
-        <img src="https://i.imgur.com/5ffIsuG.png"/>
-        <h5>Sortware Engineer</h5>
-        <h3>Ajay Kumar Arya 4</h3>
-      </div>
+
+<!-- Background -->
+<div class="luxury-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+</div>
+
+
+<main class="scene min-h-screen flex items-center justify-center px-4 py-8 md:px-8">
+
+    <div
+        id="profileWrapper"
+        class="profile-wrapper w-full max-w-6xl"
+    >
+
+        <section
+            class="profile-card rounded-[30px] overflow-hidden"
+        >
+
+            <div class="shine"></div>
+
+
+            <!-- ======================================
+                 HEADER
+            ======================================= -->
+
+            <div class="relative px-6 py-7 md:px-10 md:py-8">
+
+                <div class="flex items-center justify-between">
+
+                    <div class="flex items-center gap-3">
+
+                        <div
+                            class="h-2 w-2 rounded-full bg-[#d4af37] shadow-[0_0_15px_#d4af37]"
+                        ></div>
+
+                        <span
+                            class="text-[10px] font-semibold uppercase tracking-[.35em] text-[#d4af37]"
+                        >
+                            Professional Identity
+                        </span>
+
+                    </div>
+
+
+                    <div class="text-[10px] uppercase tracking-[.25em] text-white/30">
+                        PROFILE • 2026
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="gold-line"></div>
+
+
+            <!-- ======================================
+                 MAIN
+            ======================================= -->
+
+            <div class="grid lg:grid-cols-[400px_1fr]">
+
+
+                <!-- ==================================
+                     LEFT
+                =================================== -->
+
+                <div
+                    class="relative flex flex-col items-center px-6 py-10 md:px-10 lg:border-r lg:border-white/[.07]"
+                >
+
+                    <!-- Photo -->
+                    <div class="photo-container">
+
+                        <div
+                            class="photo-frame w-[245px] h-[300px] rounded-[24px] overflow-hidden"
+                        >
+
+                            <img
+                                src="https://photos.fife.usercontent.google.com/pw/AP1GczP6RsRgySrGCQlor6F2SPgaqa7r0TASLuK-S8HA8Dbs9Vs-ViwBqKoMDw=w1023-h1537-s-no-gm?authuser=0"
+                                alt="Ajay Kumar Arya"
+                                class="photo"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Badge -->
+                    <div
+                        class="floating-badge relative -mt-7 rounded-xl border border-[#d4af37]/30 bg-[#111]/95 px-5 py-3 text-center"
+                    >
+
+                        <p class="text-[9px] uppercase tracking-[.25em] text-[#d4af37]">
+                            Engineering
+                        </p>
+
+                        <p class="mt-1 text-sm font-semibold text-white">
+                            Senior Level
+                        </p>
+
+                    </div>
+
+
+                    <!-- Name -->
+                    <div class="mt-8 text-center">
+
+                        <h1
+                            class="gold-text font-serif text-4xl font-bold tracking-tight"
+                            style="font-family:'Playfair Display',serif;"
+                        >
+                            Ajay Kumar Arya
+                        </h1>
+
+                        <p
+                            class="mt-3 text-xs font-semibold uppercase tracking-[.3em] text-white/55"
+                        >
+                            Senior Software Engineer
+                        </p>
+
+                    </div>
+
+
+                    <div class="mt-8 w-full max-w-sm">
+
+                        <!-- Phone -->
+                        <div class="detail rounded-2xl p-4">
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#d4af37]/20 bg-[#d4af37]/[.07] text-[#d4af37]"
+                                >
+
+                                    <svg
+                                        width="19"
+                                        height="19"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M2.5 5.5A2.5 2.5 0 015 3h2.2a1.5 1.5 0 011.46 1.15l.56 2.43a1.5 1.5 0 01-.43 1.4L7.5 9.27a14.5 14.5 0 007.23 7.23l1.29-1.29a1.5 1.5 0 011.4-.43l2.43.56A1.5 1.5 0 0121 16.8V19a2.5 2.5 0 01-2.5 2.5h-.5C9.16 21.5 2.5 14.84 2.5 6v-.5z"
+                                        />
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <p class="text-[9px] uppercase tracking-[.2em] text-white/30">
+                                        Mobile
+                                    </p>
+
+                                    <p class="mt-1 text-sm font-semibold text-white/85">
+                                        8533898539
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Email -->
+                        <div class="detail mt-3 rounded-2xl p-4">
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#d4af37]/20 bg-[#d4af37]/[.07] text-[#d4af37]"
+                                >
+
+                                    <svg
+                                        width="19"
+                                        height="19"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M4 5.5h16A1.5 1.5 0 0121.5 7v10a1.5 1.5 0 01-1.5 1.5H4A1.5 1.5 0 012.5 17V7A1.5 1.5 0 014 5.5z"
+                                        />
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M3 7l9 6 9-6"
+                                        />
+
+                                    </svg>
+
+                                </div>
+
+                                <div class="min-w-0">
+
+                                    <p class="text-[9px] uppercase tracking-[.2em] text-white/30">
+                                        Email
+                                    </p>
+
+                                    <p class="mt-1 break-all text-xs font-semibold text-white/80">
+                                        ajaykumararya963983@gmail.com
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================
+                     RIGHT
+                =================================== -->
+
+                <div class="px-6 py-10 md:px-10 lg:px-12">
+
+
+                    <!-- Intro -->
+
+                    <div class="reveal">
+
+                        <p
+                            class="text-[10px] font-bold uppercase tracking-[.3em] text-[#d4af37]"
+                        >
+                            Executive Profile
+                        </p>
+
+                        <h2
+                            class="mt-4 max-w-2xl font-serif text-3xl font-semibold leading-tight text-white md:text-4xl"
+                            style="font-family:'Playfair Display',serif;"
+                        >
+                            Building software with
+                            <span class="gold-text">
+                                precision & purpose.
+                            </span>
+                        </h2>
+
+                        <p class="mt-5 max-w-2xl text-sm leading-7 text-white/45">
+
+                            Senior Software Engineer focused on designing,
+                            developing and maintaining modern web applications.
+                            Experienced in turning complex requirements into
+                            practical, scalable and user-focused software
+                            solutions.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Divider -->
+
+                    <div class="my-9 gold-line"></div>
+
+
+                    <!-- Professional Details -->
+
+                    <div class="reveal delay-1">
+
+                        <div class="flex items-center gap-3">
+
+                            <span
+                                class="h-6 w-[2px] bg-[#d4af37]"
+                            ></span>
+
+                            <h3 class="text-sm font-bold uppercase tracking-[.18em] text-white/80">
+                                Professional Details
+                            </h3>
+
+                        </div>
+
+
+                        <div class="mt-5 grid gap-3 sm:grid-cols-2">
+
+                            <div class="detail rounded-2xl p-5">
+
+                                <p class="text-[9px] uppercase tracking-[.2em] text-white/30">
+                                    Full Name
+                                </p>
+
+                                <p class="mt-2 text-sm font-semibold text-white/85">
+                                    Ajay Kumar Arya
+                                </p>
+
+                            </div>
+
+
+                            <div class="detail rounded-2xl p-5">
+
+                                <p class="text-[9px] uppercase tracking-[.2em] text-white/30">
+                                    Designation
+                                </p>
+
+                                <p class="mt-2 text-sm font-semibold text-white/85">
+                                    Senior Software Engineer
+                                </p>
+
+                            </div>
+
+
+                            <div class="detail rounded-2xl p-5">
+
+                                <p class="text-[9px] uppercase tracking-[.2em] text-white/30">
+                                    Professional Focus
+                                </p>
+
+                                <p class="mt-2 text-sm font-semibold text-white/85">
+                                    Software Engineering
+                                </p>
+
+                            </div>
+
+
+                            <div class="detail rounded-2xl p-5">
+
+                                <p class="text-[9px] uppercase tracking-[.2em] text-white/30">
+                                    Profile Type
+                                </p>
+
+                                <p class="mt-2 text-sm font-semibold text-white/85">
+                                    Professional
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Expertise -->
+
+                    <div class="reveal delay-2 mt-9">
+
+                        <div class="flex items-center gap-3">
+
+                            <span
+                                class="h-6 w-[2px] bg-[#d4af37]"
+                            ></span>
+
+                            <h3 class="text-sm font-bold uppercase tracking-[.18em] text-white/80">
+                                Areas of Expertise
+                            </h3>
+
+                        </div>
+
+
+                        <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+
+                            <div class="skill rounded-2xl p-4">
+
+                                <div class="text-xl text-[#d4af37]">
+                                    &lt;/&gt;
+                                </div>
+
+                                <p class="mt-3 text-xs font-semibold text-white/80">
+                                    Web Development
+                                </p>
+
+                            </div>
+
+
+                            <div class="skill rounded-2xl p-4">
+
+                                <div class="text-xl text-[#d4af37]">
+                                    ◈
+                                </div>
+
+                                <p class="mt-3 text-xs font-semibold text-white/80">
+                                    Backend Systems
+                                </p>
+
+                            </div>
+
+
+                            <div class="skill rounded-2xl p-4">
+
+                                <div class="text-xl text-[#d4af37]">
+                                    ◎
+                                </div>
+
+                                <p class="mt-3 text-xs font-semibold text-white/80">
+                                    Software Architecture
+                                </p>
+
+                            </div>
+
+
+                            <div class="skill rounded-2xl p-4">
+
+                                <div class="text-xl text-[#d4af37]">
+                                    ▦
+                                </div>
+
+                                <p class="mt-3 text-xs font-semibold text-white/80">
+                                    Database Systems
+                                </p>
+
+                            </div>
+
+
+                            <div class="skill rounded-2xl p-4">
+
+                                <div class="text-xl text-[#d4af37]">
+                                    ✦
+                                </div>
+
+                                <p class="mt-3 text-xs font-semibold text-white/80">
+                                    UI Development
+                                </p>
+
+                            </div>
+
+
+                            <div class="skill rounded-2xl p-4">
+
+                                <div class="text-xl text-[#d4af37]">
+                                    ⌁
+                                </div>
+
+                                <p class="mt-3 text-xs font-semibold text-white/80">
+                                    Problem Solving
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Philosophy -->
+
+                    <div class="reveal delay-3 mt-9">
+
+                        <div
+                            class="relative overflow-hidden rounded-2xl border border-[#d4af37]/15 bg-[#d4af37]/[.035] p-6"
+                        >
+
+                            <div
+                                class="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-transparent via-[#d4af37] to-transparent"
+                            ></div>
+
+                            <p class="text-[9px] uppercase tracking-[.25em] text-[#d4af37]">
+                                Professional Approach
+                            </p>
+
+                            <p class="mt-3 text-sm leading-7 text-white/55">
+                                Combining engineering discipline, clean
+                                architecture and practical thinking to create
+                                software that is reliable, maintainable and
+                                designed around real-world requirements.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Footer -->
+
+                    <div
+                        class="reveal delay-4 mt-10 flex flex-col gap-3 border-t border-white/[.07] pt-6 sm:flex-row sm:items-center sm:justify-between"
+                    >
+
+                        <p class="text-[9px] uppercase tracking-[.25em] text-white/25">
+                            Professional Profile
+                        </p>
+
+                        <div class="flex items-center gap-2">
+
+                            <span class="h-1.5 w-1.5 rounded-full bg-[#d4af37]"></span>
+
+                            <span class="text-xs font-medium text-white/45">
+                                Ajay Kumar Arya
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script>
+
+    /*
+    ==========================================
+    3D MOUSE TILT
+    ==========================================
+    */
+
+    const wrapper = document.getElementById("profileWrapper");
+
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+    if (!isMobile) {
+
+        document.addEventListener("mousemove", (e) => {
+
+            const x = (window.innerWidth / 2 - e.clientX)
+                / window.innerWidth;
+
+            const y = (window.innerHeight / 2 - e.clientY)
+                / window.innerHeight;
+
+            const rotateY = x * 8;
+            const rotateX = y * 6;
+
+            wrapper.style.transform = `
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+            `;
+
+        });
+
+
+        document.addEventListener("mouseleave", () => {
+
+            wrapper.style.transform = `
+                rotateX(0deg)
+                rotateY(0deg)
+            `;
+
+        });
+
+    }
+
+</script>
+
 </body>
 </html>
